@@ -1,0 +1,2 @@
+class ContenderController < ApplicationController
+end

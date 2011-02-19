@@ -1,0 +1,8 @@
+Sumobot Tournament System
+
+This is a ruby on rails system, that may or may not be used.  This is just
+some code used to experiment with rails with the goal of having a system you
+can register with as a contender and sign up your bots to compete.  During
+the event it would show a bracketing system as well as scores, etc.
+
+Well that's the goal anyhow.  We'll see how far we get

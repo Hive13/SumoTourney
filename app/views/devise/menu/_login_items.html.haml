@@ -1,0 +1,6 @@
+- if contender_signed_in?
+  %li
+    = link_to "logout", destroy_contender_session_path
+- else
+  %li
+    = link_to "login", new_contender_session_path

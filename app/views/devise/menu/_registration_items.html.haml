@@ -1,0 +1,7 @@
+- if contender_signed_in?
+  %li
+    = link_to "Edit Registration", edit_contender_registration_path
+- else
+  %li
+    = link_to "Register", new_contender_registration_path
+
