@@ -6,3 +6,29 @@ can register with as a contender and sign up your bots to compete.  During
 the event it would show a bracketing system as well as scores, etc.
 
 Well that's the goal anyhow.  We'll see how far we get
+
+Installation Instructions
+---------------------------
+Get rails, etc.  This project is rails 3.0 so read instructions on that.
+Example for Ubuntu: https://help.ubuntu.com/community/RubyOnRails
+You may want to install RVM if you want multiple version so rails installed
+
+Change into the SumoTourney directory and type:
+
+bundle update
+
+(Note: you will need libmysqlclient-dev to build mysql2)
+
+Copy config/database.yml-example to config/database.yml
+
+Edit the file and create an account in your SQL server that matches.  You can
+use sqlite3 for testing as well.  Once you have the datbase setup (with the yml
+file) then you need to initialize it
+
+rake db:migrate   (or rake db:migrate:reset if you munge the db)
+
+Then start the server
+
+rails server
+
+You should be able to access it via localhost:3000
