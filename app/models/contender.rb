@@ -11,10 +11,12 @@ class Contender < ActiveRecord::Base
   validates :username, :presence => true
 
   has_many :sumobots
-  has_and_belongs_to_many :roles
+  has_many :role
 
-  def role?(roles)
-	return !!self.roles.find_by_name(role.to_s)
+  def role?(findroles)
+	res = self.role.find(:all, :conditions => {:name => findroles.to_s})
+	return true if res.size == 1
+	return false
   end
 
 end

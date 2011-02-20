@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(:version => 20110220021725) do
   add_index "contenders", ["reset_password_token"], :name => "index_contenders_on_reset_password_token", :unique => true
 
   create_table "roles", :force => true do |t|
+    t.integer  "contender_id"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"

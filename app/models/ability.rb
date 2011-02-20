@@ -1,13 +1,16 @@
 class Ability
   include CanCan::Ability
 
-  def initialize(user)
+  def initialize(contender)
 
     contender ||= Contender.new # Guest?
-    if contender.role? :admin
+    if contender.role? "admin"
 	can :manage, :all
     else
 	can :read, :all
+	can :update, Sumobot do |sumobot|
+	  sumobot.contender_id == contender.id
+	end
     end
 
     # Define abilities for the passed in user here. For example:

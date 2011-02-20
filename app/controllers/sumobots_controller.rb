@@ -38,7 +38,7 @@ class SumobotsController < ApplicationController
   # GET /sumobots/1/edit
   def edit
     @sumobot = Sumobot.find(params[:id])
-    if not @sumobot.contender_id == current_contender.id then
+    if cannot? :update, @sumobot
 	redirect_to "/hax.html"
     end
   end
@@ -80,7 +80,7 @@ class SumobotsController < ApplicationController
   # DELETE /sumobots/1.xml
   def destroy
     @sumobot = Sumobot.find(params[:id])
-    if not @sumobot.contender_id == current_contender.id then
+    if cannot? :update, @sumobot
 	redirect_to "/hax.html"
     else
         @sumobot.destroy
