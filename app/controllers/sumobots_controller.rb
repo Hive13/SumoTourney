@@ -1,4 +1,6 @@
 class SumobotsController < ApplicationController
+  before_filter :authenticate_contender!, :except => [:show, :index]
+
   # GET /sumobots
   # GET /sumobots.xml
   def index
