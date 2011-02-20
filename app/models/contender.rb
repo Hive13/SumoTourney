@@ -8,6 +8,8 @@ class Contender < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me,
 	:username, :hackerspace, :hackerspace_url
 
+  validates :username, :presence => true
+
   has_and_belongs_to_many :roles
 
   def role?(roles)
