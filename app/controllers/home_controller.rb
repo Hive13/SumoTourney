@@ -5,4 +5,10 @@ class HomeController < ApplicationController
 	end
   end
 
+  def admin
+	if cannot? :manage, :all then
+	   redirect_to "/hax.html"
+        end
+  end
+
 end

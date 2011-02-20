@@ -1,9 +1,12 @@
 SumoTourney::Application.routes.draw do
+  resources :matches
+
   resources :sumobots
 
   devise_for :contenders
 
   get "home/index"
+  get "home/admin"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

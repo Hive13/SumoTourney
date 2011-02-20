@@ -9,6 +9,9 @@
 <body>
 <ul class="hmenu">
   <%= link_to "Home", root_path %>
+  <% if can? :manage, :all then %>
+	<%= link_to "Admin", home_admin_path %>
+  <% end %>
   <%= render "devise/menu/registration_items" %>
   <%= render "devise/menu/login_items" %>
 </ul>

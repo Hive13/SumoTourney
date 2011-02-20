@@ -32,3 +32,15 @@ Then start the server
 rails server
 
 You should be able to access it via localhost:3000
+
+Adding an Admin
+---------------
+You need to use the Rails console to add an admin.  After you create your first
+contender (which would be an contender id of 1)  Assuming this you type:
+
+$ rails c
+:001> Role.new(:contender_id => 1, :name => 'admin').save
+
+After you login as an admin you will have an 'Admin' link in your login bar to
+start matches and tournaments
+

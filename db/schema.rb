@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110220021725) do
+ActiveRecord::Schema.define(:version => 20110220184805) do
 
   create_table "contenders", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
@@ -35,6 +35,20 @@ ActiveRecord::Schema.define(:version => 20110220021725) do
 
   add_index "contenders", ["email"], :name => "index_contenders_on_email", :unique => true
   add_index "contenders", ["reset_password_token"], :name => "index_contenders_on_reset_password_token", :unique => true
+
+  create_table "matches", :force => true do |t|
+    t.datetime "start"
+    t.integer  "first_bot_id"
+    t.integer  "second_bot_id"
+    t.integer  "first_bot_score"
+    t.integer  "second_bot_score"
+    t.integer  "round"
+    t.integer  "winning_bot"
+    t.integer  "losing_bot"
+    t.boolean  "completed"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "roles", :force => true do |t|
     t.integer  "contender_id"
