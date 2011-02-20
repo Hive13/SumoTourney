@@ -5,6 +5,9 @@ class DeviseCreateContenders < ActiveRecord::Migration
       t.recoverable
       t.rememberable
       t.trackable
+      t.string :username
+      t.string :hackerspace
+      t.string :hackerspace_url
       t.references :role, :contender
 
       # t.confirmable
