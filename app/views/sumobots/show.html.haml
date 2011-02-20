@@ -1,0 +1,27 @@
+%p
+  .notice
+  =notice
+
+%h1=@sumobot.botname
+- if @sumobot.bot_url
+  = link_to "Bot Homepage", @sumobot.bot_url
+  %br
+%table
+  %tr
+    %th
+      = "Matches"
+      = "Wins"
+      = "Loses"
+      = "Ties"
+  %tr
+    %td
+      = @sumobot.matches
+      = @sumobot.wins
+      = @sumobot.loses
+      = @sumobot.ties
+
+- if contender_signed_in?
+  - if @sumobot.contender_id == current_contender.id
+    = link_to 'Edit Bot Info', edit_sumobot_path(@sumobot) 
+    = "|"
+= link_to 'Back', sumobots_path 

@@ -1,4 +1,18 @@
-%h1="Sumobot Competition"
-="Add more sumobot stuff here"
+%h1="Sumobot Competitions"
+%p
+  ="Welcome to the Hive13 Sumobot Competition website.  Here you can view the"
+  ="contenders and their sumobots.  You can also check for upcoming events and"
+  ="matches.  The bracket systems for current matches as well as current scores"
+  ="are also displayed."
+%p
+  ="Enjoy!  --Hive13 Staff"
+= "There are #{Contender.find(:all).size} contenders registered."
+= "A total of #{Sumobot.find(:all).size} sumobots are registered."
 %br
-=#link_to "Sumobot Contenders", contenders_path
+- if contender_signed_in?
+  - number_of_bots = @contender.sumobots.find(:all).size
+  = "You have #{number_of_bots} sumobots registered"
+  %br
+  =link_to "Register a sumobot", new_sumobot_path
+%br
+=link_to "View all sumobots", sumobots_path

@@ -1,0 +1,47 @@
+<h1>Registered Sumobots</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @sumobots.each do |sumobot| %>
+  <% owner = Contender.find(sumobot.contender_id) %>
+  <tr>
+    <td>
+    <% if sumobot.bot_url.size > 0 %>
+	<%= link_to sumobot.botname, sumobot.bot_url %>
+    <% else %>
+	<%= sumobot.botname %>
+    <% end %>
+    </td>
+    <td>
+       <%= owner.username %>
+       <% if owner.hackerspace.size > 0 %>
+	 <% if owner.hackerspace_url.size > 0 %>
+	  <%= " (" %>
+	  <%= link_to owner.hackerspace, owner.hackerspace_url %>
+	  <%= ")" %>
+	 <% else %>
+	  <%= " (#{owner.hackerspace})" %>
+	 <% end %>
+       <% end %>
+    </td>
+    <td><%= link_to 'Show Details', sumobot %></td>
+    <% if contender_signed_in? %>
+      <% if sumobot.contender_id == current_contender.id %>
+        <td><%= link_to 'Edit Bot', edit_sumobot_path(sumobot) %></td>
+        <td><%= link_to 'Delete Bot', sumobot, :confirm => 'Are you sure?', :method => :delete %></td>
+      <% end %>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<% if contender_signed_in? %> 
+  <%= link_to 'Register a new Sumobot', new_sumobot_path %>
+<% end %>

@@ -1,0 +1,27 @@
+<%= form_for(@sumobot) do |f| %>
+  <% if @sumobot.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sumobot.errors.count, "error") %> prohibited this sumobot from being saved:</h2>
+
+      <ul>
+      <% @sumobot.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p><%= f.label :botname %></br \>
+  <%= f.text_field :botname %></p>
+
+  <div id="optional">
+  <b>Optional</b>
+  <p><%= f.label :bot_url %></br \>
+  <%= f.text_field :bot_url %></p>
+
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

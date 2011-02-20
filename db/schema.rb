@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110217063947) do
+ActiveRecord::Schema.define(:version => 20110220021725) do
 
   create_table "contenders", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
@@ -38,6 +38,18 @@ ActiveRecord::Schema.define(:version => 20110217063947) do
 
   create_table "roles", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sumobots", :force => true do |t|
+    t.integer  "contender_id"
+    t.string   "botname"
+    t.string   "bot_url"
+    t.integer  "wins"
+    t.integer  "loses"
+    t.integer  "ties"
+    t.integer  "matches"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

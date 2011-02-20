@@ -10,6 +10,7 @@ class Contender < ActiveRecord::Base
 
   validates :username, :presence => true
 
+  has_many :sumobots
   has_and_belongs_to_many :roles
 
   def role?(roles)

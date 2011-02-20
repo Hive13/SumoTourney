@@ -1,4 +1,6 @@
 SumoTourney::Application.routes.draw do
+  resources :sumobots
+
   devise_for :contenders
 
   get "home/index"

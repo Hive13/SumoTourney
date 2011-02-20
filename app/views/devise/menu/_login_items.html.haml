@@ -1,6 +1,7 @@
 - if contender_signed_in?
   %li
-    = link_to "logout (#{current_contender.username})", destroy_contender_session_path
+    = link_to "logout", destroy_contender_session_path
+    = " (#{current_contender.username})"
 - else
   %li
     = link_to "login", new_contender_session_path
