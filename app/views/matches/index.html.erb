@@ -1,0 +1,37 @@
+<h1>Listing matches</h1>
+
+<table>
+  <tr>
+    <th>Start</th>
+    <th>First bot</th>
+    <th>Second bot</th>
+    <th>First bot score</th>
+    <th>Second bot score</th>
+    <th>Winning bot</th>
+    <th>Losing bot</th>
+    <th>Completed</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @matches.each do |match| %>
+  <tr>
+    <td><%= match.start %></td>
+    <td><%= match.first_bot_id %></td>
+    <td><%= match.second_bot_id %></td>
+    <td><%= match.first_bot_score %></td>
+    <td><%= match.second_bot_score %></td>
+    <td><%= match.winning_bot %></td>
+    <td><%= match.losing_bot %></td>
+    <td><%= match.completed %></td>
+    <td><%= link_to 'Show', match %></td>
+    <td><%= link_to 'Edit', edit_match_path(match) %></td>
+    <td><%= link_to 'Destroy', match, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Match', new_match_path %>

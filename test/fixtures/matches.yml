@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  start: 2011-02-20 13:48:05
+  first_bot_id: 1
+  second_bot_id: 1
+  first_bot_score: 1
+  second_bot_score: 1
+  winning_bot: 1
+  losing_bot: 1
+  completed: false
+
+two:
+  start: 2011-02-20 13:48:05
+  first_bot_id: 1
+  second_bot_id: 1
+  first_bot_score: 1
+  second_bot_score: 1
+  winning_bot: 1
+  losing_bot: 1
+  completed: false

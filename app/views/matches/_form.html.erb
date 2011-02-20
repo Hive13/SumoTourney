@@ -1,0 +1,49 @@
+<%= form_for(@match) do |f| %>
+  <% if @match.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@match.errors.count, "error") %> prohibited this match from being saved:</h2>
+
+      <ul>
+      <% @match.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :start %><br />
+    <%= f.datetime_select :start %>
+  </div>
+  <div class="field">
+    <%= f.label :first_bot_id %><br />
+    <%= f.text_field :first_bot_id %>
+  </div>
+  <div class="field">
+    <%= f.label :second_bot_id %><br />
+    <%= f.text_field :second_bot_id %>
+  </div>
+  <div class="field">
+    <%= f.label :first_bot_score %><br />
+    <%= f.text_field :first_bot_score %>
+  </div>
+  <div class="field">
+    <%= f.label :second_bot_score %><br />
+    <%= f.text_field :second_bot_score %>
+  </div>
+  <div class="field">
+    <%= f.label :winning_bot %><br />
+    <%= f.text_field :winning_bot %>
+  </div>
+  <div class="field">
+    <%= f.label :losing_bot %><br />
+    <%= f.text_field :losing_bot %>
+  </div>
+  <div class="field">
+    <%= f.label :completed %><br />
+    <%= f.check_box :completed %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

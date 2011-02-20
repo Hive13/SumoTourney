@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Start:</b>
+  <%= @match.start %>
+</p>
+
+<p>
+  <b>First bot:</b>
+  <%= @match.first_bot_id %>
+</p>
+
+<p>
+  <b>Second bot:</b>
+  <%= @match.second_bot_id %>
+</p>
+
+<p>
+  <b>First bot score:</b>
+  <%= @match.first_bot_score %>
+</p>
+
+<p>
+  <b>Second bot score:</b>
+  <%= @match.second_bot_score %>
+</p>
+
+<p>
+  <b>Winning bot:</b>
+  <%= @match.winning_bot %>
+</p>
+
+<p>
+  <b>Losing bot:</b>
+  <%= @match.losing_bot %>
+</p>
+
+<p>
+  <b>Completed:</b>
+  <%= @match.completed %>
+</p>
+
+
+<%= link_to 'Edit', edit_match_path(@match) %> |
+<%= link_to 'Back', matches_path %>
