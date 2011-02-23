@@ -4,10 +4,5 @@
 - @sumobots = Sumobot.find(:all)
 = "A total of #{@sumobots.size} sumobots are registered."
 %br
-%b= "Quick Match"
-- form_for :match, :url => new_match_path, :html => {:method => 'post'} do |f|
- First Bot:
- = f.select("first_bot_id", @sumobots.collect {|bot| [bot.botname, bot.id] })
- Second Bot:
- = f.select("first_bot_id", @sumobots.collect {|bot| [bot.botname, bot.id] })
- = submit_tag "Start Match"
+= link_to "Quick Match", new_match_path
+

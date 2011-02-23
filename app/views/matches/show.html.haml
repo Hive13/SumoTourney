@@ -1,0 +1,86 @@
+%p#notice
+  = notice
+- bot1 = Sumobot.find(@match.first_bot_id)
+- bot2 = Sumobot.find(@match.second_bot_id)
+
+%p
+  %h1
+    = bot1.botname
+    Versus
+    = bot2.botname
+
+- if @match.winning_bot then
+  %b
+    = Sumobot.find(@match.winning_bot).botname
+    Wins!!
+- else
+  %table
+    %tr
+      %td
+        = "Round #{@match.round}"
+      %td
+        Time Remaining
+        %br
+        -if @match.start then
+  
+        -else
+          Match not started
+
+%table
+  %tr
+    %th
+    %th
+      = bot1.botname
+    %th
+      = bot2.botname
+  %tr
+    %td
+      Round 1
+    %td
+      = @match.first_bot_round1_score
+    %td
+      = @match.second_bot_round1_score
+  - if @match.round > 1 then
+    %tr 
+      %td
+        Round 2
+      %td
+        = @match.first_bot_round2_score
+      %td
+        = @match.second_bot_round2_score
+    - if @match.round > 2 then
+      %tr 
+        %td
+          Round 3
+        %td
+          = @match.first_bot_round3_score
+        %td
+          = @match.second_bot_round3_score
+      - if @match.winning_bot then
+        %tr
+          %td
+            Final
+          %td
+            = @match.bot1_final_score
+          %td
+            = @match.bot2_final_score
+    -else
+      %tr
+        %td
+          Final
+        %td
+          = @match.bot1_final_score
+        %td
+          = @match.bot2_final_score
+
+%br
+- if can? :manage, @match then
+  = link_to 'Start Round', :action => "start_round"
+  |
+  = link_to "Grant #{bot1.botname} a point", :action => "grant_point", :bot_id => bot1.id
+  |
+  = link_to "Grant #{bot2.botname} a point", :action => "grant_point", :bot_id => bot2.id
+  | 
+  = link_to 'Delete Match Info', @match, :confirm => 'Are you sure?', :method => :delete
+  |
+= link_to 'Back', matches_path

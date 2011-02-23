@@ -8,6 +8,9 @@ SumoTourney::Application.routes.draw do
   get "home/index"
   get "home/admin"
 
+  match "/matches/:id/start_round" => "matches#start_round"
+  match "/matches/:id/grant_point" => "matches#grant_point"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

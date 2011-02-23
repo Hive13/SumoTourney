@@ -49,6 +49,13 @@ class MatchesController < ApplicationController
     if cannot? :create, @match
 	redirect_to "/hax.html"
     end
+    @match.round = 1
+    @match.first_bot_round1_score = 0
+    @match.first_bot_round2_score = 0
+    @match.first_bot_round3_score = 0
+    @match.second_bot_round1_score = 0
+    @match.second_bot_round2_score = 0
+    @match.second_bot_round3_score = 0
 
     respond_to do |format|
       if @match.save
@@ -91,5 +98,71 @@ class MatchesController < ApplicationController
       format.html { redirect_to(matches_url) }
       format.xml  { head :ok }
     end
+  end
+
+  def start_round
+    @match = Match.find(params[:id])
+
+    if cannot? :manage, @match then
+	redirect_to "/hax.html"
+    end
+
+    @match.update_attributes(:start => Time.now.utc)
+
+    respond_to do |format|
+        format.html { redirect_to(@match) }
+        format.xml { head :ok }
+    end
+  end
+
+  def grant_point
+    @bot = Sumobot.find(params[:bot_id])
+    @match = Match.find(params[:id])
+    
+    if cannot? :manage, @match then
+	redirect_to "/hax.html"
+    end
+
+    if not @match.start
+      respond_to do |format|
+        format.html { redirect_to(@match, :notice => 'You must first start the round!') }
+        format.xml  { render :xml => "error" , :status => "Round not started" }
+      end
+      return
+    end
+
+    round = @match.round
+    if @match.first_bot_id == @bot.id then
+	case round
+	when 1 then
+		@match.update_attributes(:first_bot_round1_score => 1)
+	when 2 then
+		@match.update_attributes(:first_bot_round2_score => 1)
+	when 3 then
+		@match.update_attributes(:first_bot_round3_score => 1)
+	end
+    elsif @match.second_bot_id == @bot.id then
+	case round
+	when 1 then
+		@match.update_attributes(:second_bot_round1_score => 1)
+	when 2 then
+		@match.update_attributes(:second_bot_round2_score => 1)
+	when 3 then
+		@match.update_attributes(:second_bot_round3_score => 1)
+	end
+    end
+
+    if @match.bot1_final_score == 2 or
+       @match.bot2_final_score == 2 then
+	 @match.update_attributes(:winning_bot => @bot.id)
+    else
+	@match.update_attributes(:round => round + 1, :start => nil)
+    end
+
+    respond_to do |format|
+        format.html { redirect_to(@match) }
+        format.xml { head :ok }
+    end
+
   end
 end

@@ -1,0 +1,36 @@
+%h1 Listing matches
+
+%table
+  %tr
+    %th First bot
+    %th Second bot
+    %th Status
+    %th
+    %th
+    %th
+
+  - @matches.each do |match|
+    - first_bot = Sumobot.find(match.first_bot_id)
+    - second_bot = Sumobot.find(match.second_bot_id)
+    %tr
+      %td= first_bot.botname
+      %td= second_bot.botname
+      %td
+        - if match.winning_bot then
+          = "#{Sumobot.find(match.winning_bot).botname} Won"
+          - if match.winning_bot == match.first_bot_id then
+            = "#{match.bot1_final_score} - #{match.bot2_final_score}"
+          - else
+            = "#{match.bot2_final_score} - #{match.bot1_final_score}"
+        - elsif match.start then
+          In Progress
+        - else
+          = "Round #{match.round} Not Started"
+      %td= link_to 'Show', match
+      - if can? :manage, match then
+        %td= link_to 'Edit', edit_match_path(match)
+        %td= link_to 'Destroy', match, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Match', new_match_path 

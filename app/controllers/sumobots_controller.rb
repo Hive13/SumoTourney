@@ -4,7 +4,12 @@ class SumobotsController < ApplicationController
   # GET /sumobots
   # GET /sumobots.xml
   def index
-    @sumobots = Sumobot.all
+    owner_id = params[:owner_id]
+    if owner_id then
+	@sumobots = Sumobot.find(owner_id)
+    else
+    	@sumobots = Sumobot.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -26,7 +31,6 @@ class SumobotsController < ApplicationController
   # GET /sumobots/new
   # GET /sumobots/new.xml
   def new
-    @contender = 
     @sumobot = Sumobot.new
 
     respond_to do |format|
@@ -48,6 +52,10 @@ class SumobotsController < ApplicationController
   def create
     @sumobot = Sumobot.new(params[:sumobot])
     @sumobot.contender_id = current_contender.id
+    @sumobot.wins = 0
+    @sumobot.loses = 0
+    @sumobot.ties = 0
+    @sumobot.matches = 0
 
      respond_to do |format|
        if @sumobot.save
