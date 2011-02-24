@@ -1,4 +1,6 @@
 SumoTourney::Application.routes.draw do
+  resources :tournaments
+
   resources :matches
 
   resources :sumobots

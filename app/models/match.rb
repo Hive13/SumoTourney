@@ -1,5 +1,7 @@
 class Match < ActiveRecord::Base
 
+  belongs_to :tournament
+
   def validate
 	errors.add_to_base "You must specify different robots to battle!" if first_bot_id == second_bot_id
   end

@@ -13,6 +13,8 @@ class CreateMatches < ActiveRecord::Migration
       t.integer :round
       t.integer :winning_bot
       t.integer :losing_bot
+      t.integer :tournament_id
+      t.integer :tournament_round
 
       t.timestamps
     end

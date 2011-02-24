@@ -1,0 +1,21 @@
+- @sumobots = Sumobot.find(:all)
+= form_for(@tournament) do |f|
+  - if @tournament.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@tournament.errors.count, "error") 
+        prohibited this tournament from being saved:
+
+      %ul
+      = @tournament.errors.full_messages.each do |msg| 
+        %li= msg 
+
+  %input{:type => 'checkbox', :value=>'Select All Bots', :onClick => '$$(\'#new_tournament input.check\').each(function(box){box.checked=true})'} Select All Bots
+  %br
+  - @sumobots.each do |sumo|
+    = check_box :competing, sumo.id, {:class => 'check'}
+    = f.label :competing, sumo.botname
+    %br
+
+  .actions
+    = f.submit

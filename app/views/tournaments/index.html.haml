@@ -1,0 +1,32 @@
+%h1
+  Tournaments
+
+%table
+  %tr
+    %th
+      Matches
+    %th
+      Rounds
+    %th
+      Status
+    %th
+    %th
+    %th
+
+  - @tournaments.each do |tournament| 
+    %tr
+      %td= tournament.total_matches
+      %td= tournament.total_rounds
+      %td= "TODO"
+      %td= link_to 'Show', tournament
+      - if can? :manage, tournament then
+        %td= link_to 'Edit', edit_tournament_path(tournament)
+        %td= link_to 'Destroy', tournament, :confirm => 'Are you sure?', :method => :delete 
+      - else
+        %td
+        %td
+
+%br
+
+- if can? :manage, :all then
+  = link_to 'New Tournament', new_tournament_path 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110220184805) do
+ActiveRecord::Schema.define(:version => 20110223192449) do
 
   create_table "contenders", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(:version => 20110220184805) do
     t.integer  "round"
     t.integer  "winning_bot"
     t.integer  "losing_bot"
+    t.integer  "tournament_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -68,6 +69,17 @@ ActiveRecord::Schema.define(:version => 20110220184805) do
     t.integer  "loses"
     t.integer  "ties"
     t.integer  "matches"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tournaments", :force => true do |t|
+    t.integer  "benched_bot"
+    t.integer  "first_place"
+    t.integer  "second_place"
+    t.integer  "third_place"
+    t.integer  "max_rounds"
+    t.integer  "current_round"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

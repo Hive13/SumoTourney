@@ -9,6 +9,10 @@
     Versus
     = bot2.botname
 
+- if @match.tournament_id then
+%b
+  = link_to "Tournament Match", tournament_path(@match.tournament_id)
+
 - if @match.winning_bot then
   %b
     = Sumobot.find(@match.winning_bot).botname

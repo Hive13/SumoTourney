@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  match_id: 1
+  benched_bot: 1
+  first_place: 1
+  second_place: 1
+  third_place: 1
+
+two:
+  match_id: 1
+  benched_bot: 1
+  first_place: 1
+  second_place: 1
+  third_place: 1

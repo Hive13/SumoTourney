@@ -1,0 +1,16 @@
+%p 
+  #notice
+  = notice
+- matches = Match.find(:all, :conditions => { :tournament_id => @tournament.id })
+- matches.each do |match|
+  -bot1 = Sumobot.find(match.first_bot_id)
+  -bot2 = Sumobot.find(match.second_bot_id)
+  = bot1.botname
+  %br
+  = bot2.botname
+  %br
+  %br
+
+= link_to 'Edit', edit_tournament_path(@tournament) 
+|
+= link_to 'Back', tournaments_path 
