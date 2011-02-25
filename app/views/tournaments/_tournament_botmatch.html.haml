@@ -1,0 +1,13 @@
+- if match.winning_bot then
+  - if match.winning_bot == bot.id then
+    .bracket
+      %b
+        = link_to bot.botname, match_path
+  - else
+    .bracket
+      %del
+        = link_to bot.botname, match_path
+- else
+  .bracket
+    = link_to bot.botname, match_path
+

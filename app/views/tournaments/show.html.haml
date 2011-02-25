@@ -1,15 +1,45 @@
 %p 
   #notice
   = notice
-- matches = Match.find(:all, :conditions => { :tournament_id => @tournament.id })
-- matches.each do |match|
-  -bot1 = Sumobot.find(match.first_bot_id)
-  -bot2 = Sumobot.find(match.second_bot_id)
-  = bot1.botname
-  %br
-  = bot2.botname
-  %br
-  %br
+
+%h1 Tournament Bracket
+
+- @last_match = Array.new
+- col = Array.new
+%table{:border => "1"}
+  %tr
+    - (1..@tournament.total_rounds).each do |round|
+      - col[round] = @tournament.matches.find(:all, :conditions => {:tournament_round => round})
+      - @last_match[round] = 0
+      %th
+        - if round == @tournament.total_rounds then
+          = "Final Round"
+        - else
+          = "Round #{round}"
+      %th
+
+  - top = true
+  - skip = 1
+  - (1..@tournament.matches.size + @tournament.matches.size - 1).each do |row|
+    %tr
+      - (1..@tournament.total_rounds).each do |round|
+        - if skip % round
+          - row_match = col[round]
+          - match = row_match[@last_match[round]]
+          = render :partial => "tournament_match_bracket", :locals => {:match => match}
+          - @last_match[round] += 1
+          %td
+            - if top
+              .bracket_join_top
+              - top = false
+            - else
+              .bracket_join_bottom
+              - top = true
+        - else
+          %td
+          %td
+      
+%br
 
 = link_to 'Edit', edit_tournament_path(@tournament) 
 |

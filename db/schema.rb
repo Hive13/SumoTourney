@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(:version => 20110223192449) do
     t.integer  "winning_bot"
     t.integer  "losing_bot"
     t.integer  "tournament_id"
+    t.integer  "tournament_round"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

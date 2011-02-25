@@ -12,6 +12,7 @@
 - if @match.tournament_id then
 %b
   = link_to "Tournament Match", tournament_path(@match.tournament_id)
+  %br
 
 - if @match.winning_bot then
   %b
@@ -63,15 +64,17 @@
       - if @match.winning_bot then
         %tr
           %td
-            Final
+            %b
+              Final
           %td
             = @match.bot1_final_score
           %td
             = @match.bot2_final_score
-    -else
+    -elsif @match.winning_bot then
       %tr
         %td
-          Final
+          %b
+            Final
         %td
           = @match.bot1_final_score
         %td
@@ -79,12 +82,13 @@
 
 %br
 - if can? :manage, @match then
-  = link_to 'Start Round', :action => "start_round"
-  |
-  = link_to "Grant #{bot1.botname} a point", :action => "grant_point", :bot_id => bot1.id
-  |
-  = link_to "Grant #{bot2.botname} a point", :action => "grant_point", :bot_id => bot2.id
-  | 
+  - if not @match.winning_bot then
+    = link_to 'Start Round', :action => "start_round"
+    |
+    = link_to "Grant #{bot1.botname} a point", :action => "grant_point", :bot_id => bot1.id
+    |
+    = link_to "Grant #{bot2.botname} a point", :action => "grant_point", :bot_id => bot2.id
+    | 
   = link_to 'Delete Match Info', @match, :confirm => 'Are you sure?', :method => :delete
   |
 = link_to 'Back', matches_path
