@@ -51,6 +51,8 @@ ActiveRecord::Schema.define(:version => 20110223192449) do
     t.integer  "losing_bot"
     t.integer  "tournament_id"
     t.integer  "tournament_round"
+    t.integer  "first_bot_from_match"
+    t.integer  "second_bot_from_match"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -75,7 +77,6 @@ ActiveRecord::Schema.define(:version => 20110223192449) do
   end
 
   create_table "tournaments", :force => true do |t|
-    t.integer  "benched_bot"
     t.integer  "first_place"
     t.integer  "second_place"
     t.integer  "third_place"

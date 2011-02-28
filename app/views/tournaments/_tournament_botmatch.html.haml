@@ -9,5 +9,8 @@
         = link_to bot.botname, match_path
 - else
   .bracket
-    = link_to bot.botname, match_path
+    - if bot.is_a? Sumobot then
+      = link_to bot.botname, match_path
+    - else
+      = link_to "TBD", match_path
 

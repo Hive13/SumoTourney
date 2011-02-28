@@ -48,24 +48,27 @@ class TournamentsController < ApplicationController
 	redirect_to "/hax.html"
     end
 
+
     @bot_ids = Array.new
     @competing.each_key {|bot_id| @bot_ids << bot_id }
 
     @bot_ids.shuffle!
-    matches = @bot_ids.size
-    if @bot_ids.size % 2 then  # Odd Number
-	matches -= 1
-    end
 
     @tournament.current_round = 1
 
+    @max_matches = @bot_ids.size - 1
+    assigned_matches = 0
+    last_round_matches = Array.new
+    current_round = 1
+
     respond_to do |format|
       if @tournament.save
-        0.step(matches, 2).each do |id|
+        # Setups Round 1
+        0.step((@bot_ids.size/2).round, 2).each do |id|
 	   @match = Match.new(
 		:first_bot_id => @bot_ids[id],
 		:second_bot_id => @bot_ids[id+1],
-		:round => 1,
+		:round => current_round,
 		:first_bot_round1_score => 0,
 		:second_bot_round1_score => 0,
 		:first_bot_round2_score => 0,
@@ -75,11 +78,54 @@ class TournamentsController < ApplicationController
 		:tournament_round => 1,
 		:tournament_id => @tournament.id)
 	   @match.save!
+           assigned_matches += 1
+           last_round_matches << @match.id
         end
 
-	if not matches == @bot_ids.size then
-		@tournament.update_attributes(:benched_bot => @bot_ids.last)
+        current_round = 2
+        new_matches = Array.new
+
+        if @bot_ids.size % 2 then  # Odd number
+	   @match = Match.new(
+		:first_bot_id => @bot_ids.last,
+		:second_bot_from_match => last_round_matches.pop,
+		:round => current_round,
+		:first_bot_round1_score => 0,
+		:second_bot_round1_score => 0,
+		:first_bot_round2_score => 0,
+		:second_bot_round2_score => 0,
+		:first_bot_round3_score => 0,
+		:second_bot_round3_score => 0,
+		:tournament_round => 1,
+		:tournament_id => @tournament.id)
+	   @match.save!
+           assigned_matches += 1
+           new_matches << @match.id
 	end
+
+        while(last_round_matches.size > 1) do
+	   @match = Match.new(
+		:first_bot_from_match => last_round_matches.pop,
+		:second_bot_from_match => last_round_matches.pop,
+		:round => current_round,
+		:first_bot_round1_score => 0,
+		:second_bot_round1_score => 0,
+		:first_bot_round2_score => 0,
+		:second_bot_round2_score => 0,
+		:first_bot_round3_score => 0,
+		:second_bot_round3_score => 0,
+		:tournament_round => 1,
+		:tournament_id => @tournament.id)
+	   @match.save!
+           assigned_matches += 1
+           new_matches << @match.id
+	   if last_round_matches.size < 2 then
+		last_round_matches += new_matches
+		new_matches = Array.new
+		current_round += 1
+	   end
+	end
+	@tournament.update_attributes(:max_rounds => current_round)
         format.html { redirect_to(@tournament, :notice => 'Tournament was successfully created.') }
         format.xml  { render :xml => @tournament, :status => :created, :location => @tournament }
       else

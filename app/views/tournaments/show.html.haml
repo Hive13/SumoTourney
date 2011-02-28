@@ -23,21 +23,18 @@
   - (1..@tournament.matches.size + @tournament.matches.size - 1).each do |row|
     %tr
       - (1..@tournament.total_rounds).each do |round|
-        - if skip % round
+        - if row <= col[round].size then
           - row_match = col[round]
           - match = row_match[@last_match[round]]
-          = render :partial => "tournament_match_bracket", :locals => {:match => match}
+          = render :partial => "tournament_match_bracket", :locals => {:match => match, :round => round}
           - @last_match[round] += 1
-          %td
+          %td{:colspan => round}
             - if top
               .bracket_join_top
               - top = false
             - else
               .bracket_join_bottom
               - top = true
-        - else
-          %td
-          %td
       
 %br
 

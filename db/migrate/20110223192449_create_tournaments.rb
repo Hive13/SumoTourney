@@ -1,7 +1,6 @@
 class CreateTournaments < ActiveRecord::Migration
   def self.up
     create_table :tournaments do |t|
-      t.integer :benched_bot
       t.integer :first_place
       t.integer :second_place
       t.integer :third_place
