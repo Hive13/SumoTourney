@@ -68,14 +68,14 @@ class TournamentsController < ApplicationController
 	   @match = Match.new(
 		:first_bot_id => @bot_ids[id],
 		:second_bot_id => @bot_ids[id+1],
-		:round => current_round,
+		:round => 1,
 		:first_bot_round1_score => 0,
 		:second_bot_round1_score => 0,
 		:first_bot_round2_score => 0,
 		:second_bot_round2_score => 0,
 		:first_bot_round3_score => 0,
 		:second_bot_round3_score => 0,
-		:tournament_round => 1,
+		:tournament_round => current_round,
 		:tournament_id => @tournament.id)
 	   @match.save!
            assigned_matches += 1
@@ -89,14 +89,14 @@ class TournamentsController < ApplicationController
 	   @match = Match.new(
 		:first_bot_id => @bot_ids.last,
 		:second_bot_from_match => last_round_matches.pop,
-		:round => current_round,
+		:round => 1,
 		:first_bot_round1_score => 0,
 		:second_bot_round1_score => 0,
 		:first_bot_round2_score => 0,
 		:second_bot_round2_score => 0,
 		:first_bot_round3_score => 0,
 		:second_bot_round3_score => 0,
-		:tournament_round => 1,
+		:tournament_round => current_round,
 		:tournament_id => @tournament.id)
 	   @match.save!
            assigned_matches += 1
@@ -107,14 +107,14 @@ class TournamentsController < ApplicationController
 	   @match = Match.new(
 		:first_bot_from_match => last_round_matches.pop,
 		:second_bot_from_match => last_round_matches.pop,
-		:round => current_round,
+		:round => 1,
 		:first_bot_round1_score => 0,
 		:second_bot_round1_score => 0,
 		:first_bot_round2_score => 0,
 		:second_bot_round2_score => 0,
 		:first_bot_round3_score => 0,
 		:second_bot_round3_score => 0,
-		:tournament_round => 1,
+		:tournament_round => current_round,
 		:tournament_id => @tournament.id)
 	   @match.save!
            assigned_matches += 1
