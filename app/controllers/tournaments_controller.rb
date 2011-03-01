@@ -85,7 +85,7 @@ class TournamentsController < ApplicationController
         current_round = 2
         new_matches = Array.new
 
-        if @bot_ids.size % 2 then  # Odd number
+        if @bot_ids.size % 2 == 1 then  # Odd number
 	   @match = Match.new(
 		:first_bot_id => @bot_ids.last,
 		:second_bot_from_match => last_round_matches.pop,

@@ -4,7 +4,7 @@
 %table
   %tr
     %th
-      Matches
+      Current
     %th
       Rounds
     %th
@@ -15,8 +15,8 @@
 
   - @tournaments.each do |tournament| 
     %tr
-      %td= tournament.total_matches
-      %td= tournament.total_rounds
+      %td= tournament.current_round
+      %td= tournament.max_rounds
       %td= "TODO"
       %td= link_to 'Show', tournament
       - if can? :manage, tournament then

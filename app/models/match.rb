@@ -3,7 +3,13 @@ class Match < ActiveRecord::Base
   belongs_to :tournament
 
   def validate
-	errors.add_to_base "You must specify different robots to battle!" if first_bot_id == second_bot_id
+	if first_bot_id == nil and first_bot_from_match == nil then
+	   errors.add_to_base "You must specify either a first bot or first bot match"
+	elsif second_bot_id == nil and second_bot_from_match == nil then
+	   errors.add_to_base "You must specify either a second bot or second bot match"
+        end
+
+	errors.add_to_base "You must specify different robots to battle!" if first_bot_id == second_bot_id and not first_bot_id == nil
   end
 
   def bot1_final_score

@@ -155,6 +155,19 @@ class MatchesController < ApplicationController
     if @match.bot1_final_score == 2 or
        @match.bot2_final_score == 2 then
 	 @match.update_attributes(:winning_bot => @bot.id)
+	 if @match.tournament_id then
+	   nextmatch = Match.find(:first, :conditions => {:first_bot_from_match => @match.id})
+	   if nextmatch then
+		nextmatch.update_attributes(:first_bot_id => @bot.id)
+	   else
+	   	nextmatch = Match.find(:first, :conditions => {:second_bot_from_match => @match.id})
+		if nextmatch then
+			nextmatch.update_attributes(:second_bot_id => @bot.id)
+		else
+			puts "TODO: Game done, assign winnners"
+		end
+	   end
+	 end	
     else
 	@match.update_attributes(:round => round + 1, :start => nil)
     end
