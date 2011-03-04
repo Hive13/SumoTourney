@@ -1,6 +1,18 @@
-body { background-color: #fff; color: #333; }
 
-body, p, ol, ul, td {
+body {
+  background:  url('/images/background.jpg') top center #000;
+  font-family: 'VT323', arial, serif;
+  color: #474844;
+  font-size: 20px;
+}
+
+.container {
+ width: 800px; 
+ margin: 0 auto; 
+ position: relative;
+}
+
+p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size:   13px;
   line-height: 18px;
@@ -58,8 +70,9 @@ div.field, div.actions {
 ul.hmenu {
   list-style: none;
   margin: 0 0 2em;
-  padding: 0;
+  padding: 0 0 50px 0;
   text-align: right;
+  background-color: #white;
 }
 
 ul.hmenu li {
@@ -93,3 +106,37 @@ height:20px;
 width:10px;
 }
 
+#botimage {
+ position: absolute; 
+ top: -340px;
+ left: -50px;
+}
+
+    #content { border: 1px solid #353535; margin-top: 230px; -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px; }
+
+    #navigation { background: #1e1e1e; padding: 10px; margin-bottom: 20px; color: #626262; -webkit-border-top-left-radius: 8px;
+    -webkit-border-top-right-radius: 8px;
+    -moz-border-radius-topleft: 8px;
+    -moz-border-radius-topright: 8px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px; padding-left: 40px; border-bottom: 1px solid #353535;}
+
+    #navigation a { position: relative; z-index: 1001; color: #626262; text-decoration: none; font-size: 22px; text-transform: uppercase; letter-spacing: 2px; margin-right: 18px; display: inline-block; padding: 5px; -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px; }
+    #navigation a:hover { background: #3c3c3c; color: #8c8c8c; cursor: pointer;}
+
+    .inner { padding: 20px; }
+
+    #footer { padding: 10px 30px; font-size: 13px; }
+    .video {-webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px; border: 1px solid #2a2a28;  }
+    .left { float: left; margin-right: 40px; }
+    .clear { clear: both;  }
+
+    h1 { font-size: 35px; color: #4e4f4b;  text-transform: uppercase;}
+
+input { position:relative; z-index: 1; }

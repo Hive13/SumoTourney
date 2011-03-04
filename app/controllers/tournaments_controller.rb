@@ -100,25 +100,27 @@ class TournamentsController < ApplicationController
 		:tournament_id => @tournament.id)
 	   @match.save!
            assigned_matches += 1
-           new_matches << @match.id
+           last_round_matches << @match.id
 	end
 
-        while(last_round_matches.size > 1) do
-	   @match = Match.new(
-		:first_bot_from_match => last_round_matches.pop,
-		:second_bot_from_match => last_round_matches.pop,
-		:round => 1,
-		:first_bot_round1_score => 0,
-		:second_bot_round1_score => 0,
-		:first_bot_round2_score => 0,
-		:second_bot_round2_score => 0,
-		:first_bot_round3_score => 0,
-		:second_bot_round3_score => 0,
-		:tournament_round => current_round,
-		:tournament_id => @tournament.id)
-	   @match.save!
-           assigned_matches += 1
-           new_matches << @match.id
+        while(last_round_matches.size > 0 and assigned_matches <= @max_matches) do
+	   if last_round_matches.size > 1 then
+  	     @match = Match.new(
+  		:first_bot_from_match => last_round_matches.pop,
+  		:second_bot_from_match => last_round_matches.pop,
+  		:round => 1,
+  		:first_bot_round1_score => 0,
+  		:second_bot_round1_score => 0,
+  		:first_bot_round2_score => 0,
+  		:second_bot_round2_score => 0,
+  		:first_bot_round3_score => 0,
+  		:second_bot_round3_score => 0,
+  		:tournament_round => current_round,
+  		:tournament_id => @tournament.id)
+  	     @match.save!
+             assigned_matches += 1
+             new_matches << @match.id
+	   end
 	   if last_round_matches.size < 2 then
 		last_round_matches += new_matches
 		new_matches = Array.new
