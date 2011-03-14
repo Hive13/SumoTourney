@@ -9,6 +9,7 @@ gem 'mysql2'
 gem 'haml'
 gem 'devise'
 gem 'cancan'
+gem 'paperclip'
 
 # Use unicorn as the web server
 # gem 'unicorn'

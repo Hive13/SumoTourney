@@ -6,8 +6,11 @@ class DeviseCreateContenders < ActiveRecord::Migration
       t.rememberable
       t.trackable
       t.string :username
-      t.string :hackerspace
-      t.string :hackerspace_url
+      t.integer :team_id
+      t.integer :hackerspace_id
+      t.string :profile_pic_file_name
+      t.string :profile_pic_content_type
+      t.string :profile_pic_file_size
       t.references :role, :contender
 
       # t.confirmable

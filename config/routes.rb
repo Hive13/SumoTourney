@@ -1,4 +1,8 @@
 SumoTourney::Application.routes.draw do
+  resources :hackerspaces
+
+  resources :teams
+
   resources :tournaments
 
   resources :matches
@@ -12,6 +16,7 @@ SumoTourney::Application.routes.draw do
 
   match "/matches/:id/start_round" => "matches#start_round"
   match "/matches/:id/grant_point" => "matches#grant_point"
+  match "/hackerspaces/:id/join" => "hackerspaces#join"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

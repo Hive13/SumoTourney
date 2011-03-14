@@ -10,8 +10,12 @@ class Contender < ActiveRecord::Base
 
   validates :username, :presence => true
 
+  has_attached_file :profile_pic, :styles => { :thumb => "75x75#", :small => "150x150>" }
+
   has_many :sumobots
   has_many :role
+  belongs_to :team
+  belongs_to :hackerspace
 
   def role?(findroles)
 	res = self.role.find(:all, :conditions => {:name => findroles.to_s})

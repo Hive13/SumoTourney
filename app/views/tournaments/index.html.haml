@@ -1,31 +1,35 @@
 %h1
   Tournaments
 
-%table
-  %tr
-    %th
-      Current
-    %th
-      Rounds
-    %th
-      Status
-    %th
-    %th
-    %th
-
-  - @tournaments.each do |tournament| 
+- if @tournaments.size < 1
+  There are currently no tournaments
+  %br
+- else
+  %table
     %tr
-      %td= tournament.current_round
-      %td= tournament.max_rounds
-      %td= "TODO"
-      %td= link_to 'Show', tournament
-      - if can? :manage, tournament then
-        %td= link_to 'Edit', edit_tournament_path(tournament)
-        %td= link_to 'Destroy', tournament, :confirm => 'Are you sure?', :method => :delete 
-      - else
-        %td
-        %td
-
+      %th
+        Current
+      %th
+        Rounds
+      %th
+        Status
+      %th
+      %th
+      %th
+  
+    - @tournaments.each do |tournament| 
+      %tr
+        %td= tournament.current_round
+        %td= tournament.max_rounds
+        %td= "TODO"
+        %td= link_to 'Show', tournament
+        - if can? :manage, tournament then
+          %td= link_to 'Edit', edit_tournament_path(tournament)
+          %td= link_to 'Destroy', tournament, :confirm => 'Are you sure?', :method => :delete 
+        - else
+          %td
+          %td
+  
 %br
 
 - if can? :manage, :all then

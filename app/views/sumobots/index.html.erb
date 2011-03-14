@@ -1,7 +1,15 @@
 <h1>Registered Sumobots</h1>
 
+<% if @sumobots.size < 1 %>
+  There are currently no sumobots registered
+  <br>
+<% else %>
 <table>
   <tr>
+    <th></th>
+    <th>Bot</th>
+    <th>Owner</th>
+    <th>Org</th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,6 +19,11 @@
   <% owner = Contender.find(sumobot.contender_id) %>
   <tr>
     <td>
+      <% if sumobot.pic.exists? %>
+	<%= image_tag sumobot.pic.url(:thumb) %>
+      <% end %>
+    </td>
+    <td>
     <% if sumobot.bot_url.size > 0 %>
 	<%= link_to sumobot.botname, sumobot.bot_url %>
     <% else %>
@@ -19,8 +32,16 @@
     </td>
     <td>
        <%= owner.username %>
-       <% if owner.hackerspace.size > 0 %>
-	 <% if owner.hackerspace_url.size > 0 %>
+    </td>
+    <td>
+       <% if owner.hackerspace %>
+         <% if owner.hackerspace.pic %>
+            <% if owner.hackerspace.url %>
+	      <%= link_to image_tag(owner.hackerspace.pic.url(:thumb), :border=>0), owner.hackerspace %>
+	    <% else %>
+	      <%= image_tag(owner.hackerspace.pic(:thumb)) %>
+	    <% end %>
+	 <% elsif owner.hackerspace.url %>
 	  <%= " (" %>
 	  <%= link_to owner.hackerspace, owner.hackerspace_url %>
 	  <%= ")" %>
@@ -37,6 +58,7 @@
   </tr>
 <% end %>
 </table>
+<% end %>
 
 <br />
 

@@ -10,23 +10,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110223192449) do
+ActiveRecord::Schema.define(:version => 20110314004745) do
 
   create_table "contenders", :force => true do |t|
-    t.string   "email",                               :default => "", :null => false
-    t.string   "encrypted_password",   :limit => 128, :default => "", :null => false
-    t.string   "password_salt",                       :default => "", :null => false
+    t.string   "email",                                   :default => "", :null => false
+    t.string   "encrypted_password",       :limit => 128, :default => "", :null => false
+    t.string   "password_salt",                           :default => "", :null => false
     t.string   "reset_password_token"
     t.string   "remember_token"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                       :default => 0
+    t.integer  "sign_in_count",                           :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.string   "username"
-    t.string   "hackerspace"
-    t.string   "hackerspace_url"
+    t.integer  "team_id"
+    t.integer  "hackerspace_id"
+    t.string   "profile_pic_file_name"
+    t.string   "profile_pic_content_type"
+    t.string   "profile_pic_file_size"
     t.integer  "role_id"
     t.integer  "contender_id"
     t.datetime "created_at"
@@ -35,6 +38,17 @@ ActiveRecord::Schema.define(:version => 20110223192449) do
 
   add_index "contenders", ["email"], :name => "index_contenders_on_email", :unique => true
   add_index "contenders", ["reset_password_token"], :name => "index_contenders_on_reset_password_token", :unique => true
+
+  create_table "hackerspaces", :force => true do |t|
+    t.string   "name"
+    t.string   "url"
+    t.string   "pic_file_name"
+    t.string   "pic_content_type"
+    t.integer  "pic_file_size"
+    t.integer  "contender_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "matches", :force => true do |t|
     t.datetime "start"
@@ -72,6 +86,16 @@ ActiveRecord::Schema.define(:version => 20110223192449) do
     t.integer  "loses"
     t.integer  "ties"
     t.integer  "matches"
+    t.string   "pic_file_name"
+    t.string   "pic_content_type"
+    t.integer  "pic_file_size"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "teams", :force => true do |t|
+    t.string   "name"
+    t.integer  "contender_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

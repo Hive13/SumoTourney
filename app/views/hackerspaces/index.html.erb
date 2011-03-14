@@ -1,0 +1,48 @@
+<h1>Listing hackerspaces</h1>
+
+<% if contender_signed_in? %>
+  <% @contender = Contender.find(current_contender.id) %>
+<% end %>
+<table width=100%>
+  <tr>
+    <th></th>
+    <th>Name</th>
+    <th>Url</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @hackerspaces.each do |hackerspace| %>
+  <tr>
+    <td>
+      <% if hackerspace.pic.exists? %>
+	<%= image_tag hackerspace.pic.url(:thumb) %>
+      <% end %>
+    <td><b><%= hackerspace.name %></b></td>
+    <td><%= link_to hackerspace.url, show_external_link(hackerspace.url) %></td>
+    <td><%= link_to 'Show', hackerspace %></td>
+    <td>
+       <% if contender_signed_in? %>
+         <% if @contender.id == hackerspace.id %>
+            Member
+         <% else %>
+  	<%= link_to 'Join', :action => "join", :id => hackerspace.id %>
+         <% end %>
+       <% end %>
+    </td>
+    <% if can? :update, hackerspace %>
+      <td><%= link_to 'Edit', edit_hackerspace_path(hackerspace) %></td>
+      <td><%= link_to 'Destroy', hackerspace, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% else %>
+      <td></td>
+      <td></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Hackerspace', new_hackerspace_path %>

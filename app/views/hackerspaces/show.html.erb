@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <% if @hackerspace.pic.exists? %>
+    <%= image_tag @hackerspace.pic.url(:small) %>
+  <% end %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @hackerspace.name %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%= link_to @hackerspace.url, show_external_link(@hackerspace.url) %>
+</p>
+
+<% if not contender_signed_in? %>
+  <% owner = Contender.find(@hackerspace.contender_id) %>
+  <p>Entry created by
+    <%= owner.username %>
+  </p>
+<% else %>
+  <% @contender = Contender.find(current_contender.id) %>
+  <% if not @hackerspace.contender_id == @contender.id %>
+    <% owner = Contender.find(@hackerspace.contender_id) %>
+    <p>Entry created by
+      <%= owner.username %>
+    </p>
+  <% end %>
+<% end %>
+
+<% if contender_signed_in? %>
+  <% if @hackerspace.id == @contender.id %>
+    <B>You are currently a member of this Organization</B><BR />
+  <% else %>
+    <%= link_to 'Join', :action => "join", :id => @hackerspace.id %>
+  <% end %>
+<% end %>
+
+<% if can? :update, Hackerspace %>
+  <%= link_to 'Edit', edit_hackerspace_path(@hackerspace) %> |
+<% end %>
+<%= link_to 'Back', hackerspaces_path %>

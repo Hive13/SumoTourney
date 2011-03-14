@@ -1,4 +1,4 @@
-<%= form_for(@sumobot) do |f| %>
+<%= form_for(@sumobot, :html => {:multipart => true}) do |f| %>
   <% if @sumobot.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@sumobot.errors.count, "error") %> prohibited this sumobot from being saved:</h2>
@@ -16,6 +16,7 @@
 
   <div id="optional">
   <b>Optional</b>
+  <p><%= f.label :pic %><%= f.file_field :pic %></p>
   <p><%= f.label :bot_url %></br \>
   <%= f.text_field :bot_url %></p>
 

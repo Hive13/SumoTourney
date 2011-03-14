@@ -1,9 +1,18 @@
+%p.left.flickr
+  %iframe{:src => 'http://www.flickr.com/slideShow/index.gne?tags=sumo13', :width=>400, :height=>280, :frameborder=>0}
+
 %h1="Sumobot Competitions"
 %p
   ="Welcome to the Hive13 Sumobot Competition website.  Here you can view the"
   ="contenders and their sumobots.  You can also check for upcoming events and"
   ="matches.  The bracket systems for current matches as well as current scores"
   ="are also displayed."
+%p
+  ="Tag your flickr images as"
+  %b
+    sumo13
+  ="to have them show up on the home page.  This site is a work in progress so"
+  ="not all features maybe working at this time."
 %p
   ="Enjoy!  --Hive13 Staff"
 = "There are #{Contender.find(:all).size} contenders registered."
@@ -16,6 +25,8 @@
   =link_to "Register a sumobot", new_sumobot_path
 %br
 =link_to "View all sumobots", sumobots_path
+%br
+=link_to "Associated Hackerspaces/Organizations", hackerspaces_path
 %br
 =link_to "View all matches", matches_path
 %br

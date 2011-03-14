@@ -11,6 +11,12 @@ class Ability
 	can :update, Sumobot do |sumobot|
 	  sumobot.contender_id == contender.id
 	end
+	can :update, Hackerspace do |hackerspace|
+	  hackerspace.contender_id == contender.id
+        end
+	can :update, Team do |team|
+	  team.contender_id == contender.id
+        end
     end
 
     # Define abilities for the passed in user here. For example:

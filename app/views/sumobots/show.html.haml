@@ -2,6 +2,8 @@
   .notice
   =notice
 
+- if @sumobot.pic.exists?
+  =image_tag @sumobot.pic.url(:small)
 %h1=@sumobot.botname
 - if @sumobot.bot_url
   = link_to "Bot Homepage", @sumobot.bot_url
