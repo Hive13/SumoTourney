@@ -35,7 +35,7 @@
     </td>
     <td>
        <% if owner.hackerspace %>
-         <% if owner.hackerspace.pic %>
+         <% if owner.hackerspace.pic.exists? %>
             <% if owner.hackerspace.url %>
 	      <%= link_to image_tag(owner.hackerspace.pic.url(:thumb), :border=>0), owner.hackerspace %>
 	    <% else %>
