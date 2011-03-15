@@ -16,6 +16,21 @@
   <%= link_to @hackerspace.url, show_external_link(@hackerspace.url) %>
 </p>
 
+<p>
+  <b>Members:</b>
+  Currently has <%= pluralize(@hackerspace.members.size, "member") %>
+  <br>
+  <table id=member_list>
+    <% @hackerspace.members.each do |member| %>
+        <tr>
+	<td id=member_list_name>
+		<%= member.username %>
+	</td>
+  	</tr>
+    <% end %>
+  </table>
+</p>
+
 <% if not contender_signed_in? %>
   <% owner = Contender.find(@hackerspace.contender_id) %>
   <p>Entry created by
@@ -32,7 +47,7 @@
 <% end %>
 
 <% if contender_signed_in? %>
-  <% if @hackerspace.id == @contender.id %>
+  <% if @hackerspace.id == @contender.hackerspace_id %>
     <B>You are currently a member of this Organization</B><BR />
   <% else %>
     <%= link_to 'Join', :action => "join", :id => @hackerspace.id %>
