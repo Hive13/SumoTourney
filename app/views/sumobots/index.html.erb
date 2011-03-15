@@ -43,7 +43,7 @@
 	    <% end %>
 	 <% elsif owner.hackerspace.url %>
 	  <%= " (" %>
-	  <%= link_to owner.hackerspace.name, owner.hackerspace.url %>
+	  <%= link_to owner.hackerspace.name, owner.hackerspace %>
 	  <%= ")" %>
 	 <% else %>
 	  <%= " (#{owner.hackerspace})" %>
