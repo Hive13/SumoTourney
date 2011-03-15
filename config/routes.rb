@@ -1,4 +1,6 @@
 SumoTourney::Application.routes.draw do
+  resources :messages
+
   resources :hackerspaces
 
   resources :teams

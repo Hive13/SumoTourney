@@ -140,3 +140,12 @@ width:10px;
     h1 { font-size: 35px; color: #4e4f4b;  text-transform: uppercase;}
 
 input { position:relative; z-index: 1; }
+
+#admin_msg {
+  margin-top: 5px;
+  -webkit-border-radius: 10px; -moz-border-radius: 10px, border-radius: 10px;
+  border: 1px solid #970f0f;
+  background-color: #f76262;
+  padding: 5px;
+  color: #6e2222;
+}

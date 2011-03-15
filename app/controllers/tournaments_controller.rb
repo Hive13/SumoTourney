@@ -161,7 +161,7 @@ class TournamentsController < ApplicationController
   def destroy
     @tournament = Tournament.find(params[:id])
 
-    if crannot? :manage, @tournament then
+    if cannot? :manage, @tournament then
 	redirect_to "/hax.html"
     end
 

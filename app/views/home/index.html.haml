@@ -16,7 +16,7 @@
 %p
   ="Enjoy!  --Hive13 Staff"
 = "There are #{Contender.find(:all).size} contenders registered."
-= "A total of #{Sumobot.find(:all).size} sumobots are registered."
+= "A total of #{Sumobot.find(:all).size} sumobots registered."
 %br
 - if contender_signed_in?
   - number_of_bots = @contender.sumobots.find(:all).size
@@ -31,3 +31,9 @@
 =link_to "View all matches", matches_path
 %br
 =link_to "View Tournamenets", tournaments_path
+- message = Message.find(:last, :conditions => {:msgtype => "admin"})
+- if message
+  %br
+  #admin_msg
+    = message.msg
+

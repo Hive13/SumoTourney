@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  contender_id: 1
+  type: MyString
+  msg: MyString
+
+two:
+  contender_id: 1
+  type: MyString
+  msg: MyString
