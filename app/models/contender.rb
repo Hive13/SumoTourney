@@ -10,7 +10,7 @@ class Contender < ActiveRecord::Base
 
   validates :username, :presence => true
 
-  has_attached_file :profile_pic, :styles => { :thumb => "75x75#", :small => "150x150>" }
+  has_attached_file :profile_pic, :styles => { :thumb => "75x75>", :small => "150x150>" }
 
   has_many :sumobots
   has_many :role
