@@ -2,7 +2,7 @@
 %p
  = "Let the games begin!"
 - @sumobots = Sumobot.find(:all)
-= "A total of #{@sumobots.size} sumobots are registered."
+= "A total of #{pluralize(@sumobots.size, "sumobot")} registered."
 %br
 = link_to "Quick Match", new_match_path
 %br

@@ -15,12 +15,12 @@
   ="not all features maybe working at this time."
 %p
   ="Enjoy!  --Hive13 Staff"
-= "There are #{Contender.find(:all).size} contenders registered."
-= "A total of #{Sumobot.find(:all).size} sumobots registered."
+= "There are #{pluralize(Contender.find(:all).size, "contender")} registered."
+= "A total of #{pluralize(Sumobot.find(:all).size, "sumobot")} registered."
 %br
 - if contender_signed_in?
   - number_of_bots = @contender.sumobots.find(:all).size
-  = "You have #{number_of_bots} sumobots registered"
+  = "You have #{pluralize(number_of_bots, "sumobot")} registered"
   %br
   =link_to "Register a sumobot", new_sumobot_path
 %br
