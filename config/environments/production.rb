@@ -46,4 +46,9 @@ SumoTourney::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+
+config.action_mailer.default_url_options = { :host => 'sumobots.hive13.org' }
+config.action_mailer.smtp_settings = { :enable_starttls_auto => false }
+
+
 end
