@@ -11,6 +11,8 @@ gem 'devise'
 gem 'cancan'
 gem 'paperclip'
 
+gem "rails3-generators", :group => :development
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
