@@ -7,6 +7,7 @@ gem 'rails', '3.0.4.rc1'
 
 gem 'mysql2'
 gem 'haml'
+gem 'haml-rails'
 gem 'devise'
 gem 'cancan'
 gem 'paperclip'
