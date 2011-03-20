@@ -5,21 +5,27 @@
 - if @sumobot.pic.exists?
   =image_tag @sumobot.pic.url(:small)
 %h1=@sumobot.botname
-- if @sumobot.bot_url
-  = link_to "Bot Homepage", @sumobot.bot_url
+- if @sumobot.bot_url.size > 0
+  = link_to "Bot Homepage", show_external_link(@sumobot.bot_url)
   %br
-%table
+%table#bot_matches_table
   %tr
-    %th
+    %th#bot_matches_hdr
       = "Matches"
+    %th#bot_wins_hdr
       = "Wins"
+    %th#bot_loses_hdr
       = "Loses"
+    %th#bot_ties_hdr
       = "Ties"
   %tr
-    %td
+    %td#bot_matches
       = @sumobot.matches
+    %td#bot_wins
       = @sumobot.wins
+    %td#bot_loses
       = @sumobot.loses
+    %td#bot_ties
       = @sumobot.ties
 
 - if contender_signed_in?

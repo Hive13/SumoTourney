@@ -149,3 +149,11 @@ input { position:relative; z-index: 1; }
   padding: 5px;
   color: #6e2222;
 }
+
+#bot_matches_table {
+  width: 100%;
+}
+
+#bot_wins, #bot_loses, #bot_ties, #bot_matches {
+  text-align:center;
+}
