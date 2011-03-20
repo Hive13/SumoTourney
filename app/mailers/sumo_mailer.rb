@@ -4,7 +4,7 @@ class SumoMailer < ActionMailer::Base
   def update_email(contender, subj, body)
     @contender = contender
     @url = default_url_options[:host]
-    @body = body
+    @msg = body
     mail(:to => contender.email, :subject => subj)
   end
 end
