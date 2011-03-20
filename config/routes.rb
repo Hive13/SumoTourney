@@ -1,5 +1,6 @@
 SumoTourney::Application.routes.draw do
   get "admin/contenders"
+  post "admin/email_contenders"
 
   resources :messages
 
