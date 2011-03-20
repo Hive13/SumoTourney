@@ -63,7 +63,7 @@ class HackerspacesController < ApplicationController
     @contender.save!
     
     respond_to do |format|
-     format.html { redirect_to(edit_contender_registration_path, :notice => "Joined #{@hackerspace.name}") }
+     format.html { redirect_to(@hackerspace, :notice => "Joined #{@hackerspace.name}") }
      format.xml { head :ok }
     end
   end

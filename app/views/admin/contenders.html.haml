@@ -1,0 +1,22 @@
+%h1 Contenders
+%p
+  List of registered contenders
+%table
+  %tr
+    %th Username
+    %th Email
+    %th Hackerspace
+    %th Bots
+    %th
+  - @contenders.each do |c|
+    %tr
+      %td
+        =c.username
+      %td
+        =c.email
+      %td
+        -if c.hackerspace
+          =c.hackerspace.name
+      %td
+        =c.sumobots.size
+      %td

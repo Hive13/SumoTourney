@@ -1,4 +1,6 @@
 class HomeController < ApplicationController
+  before_filter :authenticate_contender!, :except => [:index]
+
   def index
 	if contender_signed_in?
 		@contender = Contender.find(current_contender.id)

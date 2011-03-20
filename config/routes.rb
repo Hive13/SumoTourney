@@ -1,4 +1,6 @@
 SumoTourney::Application.routes.draw do
+  get "admin/contenders"
+
   resources :messages
 
   resources :hackerspaces
