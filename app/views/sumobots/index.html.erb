@@ -54,7 +54,7 @@
        <% end %>
     </td>
     <td><%= link_to 'Show Details', sumobot %></td>
-    <% if can? :update, sumobot %>
+    <% if can? :update, sumobot and contender_signed_in? %>
         <td><%= link_to 'Edit Bot', edit_sumobot_path(sumobot) %></td>
         <td><%= link_to 'Delete Bot', sumobot, :confirm => 'Are you sure?', :method => :delete %></td>
     <% end %>

@@ -45,4 +45,8 @@
 
 <br />
 
-<%= link_to 'New Hackerspace', new_hackerspace_path %>
+<% if contender_signed_in? %>
+  <%= link_to 'New Hackerspace', new_hackerspace_path %>
+   <br>
+<% end %>
+<%= link_to 'Back', home_index_path %>
