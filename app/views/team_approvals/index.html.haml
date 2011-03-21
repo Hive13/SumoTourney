@@ -1,0 +1,21 @@
+- if not current_contender.team
+  %h1 You must be a member of a team to view approvals
+- else
+  - @approvals = TeamApproval.find(:all, :conditions => {:team_id => current_contender.team.id, :status => "apply"})
+
+  - if @approvals.size == 0
+    %h1 There are no pending approvals
+  - else
+    %h1="Pending Approvals for [#{current_contender.team.name}]"
+
+    %table
+      %tr
+        %th Applicant
+        %th Applied on
+        %th
+      - @approvals.each do |team_approval|
+        %tr
+          - applicant = Contender.find(team_approval.from_contender)
+          %td= applicant.username
+          %td= team_approval.created_at
+          %td= link_to 'Show', team_approval

@@ -25,13 +25,16 @@
     </td>
     <td>
     <% if sumobot.bot_url.size > 0 %>
-	<%= link_to sumobot.botname, sumobot.bot_url %>
+	<%= link_to sumobot.botname, show_external_link(sumobot.bot_url) %>
     <% else %>
 	<%= sumobot.botname %>
     <% end %>
     </td>
     <td>
        <%= owner.username %>
+       <% if sumobot.contender.team %>
+         <%= "[#{sumobot.contender.team.name}]" %>
+       <% end %>
     </td>
     <td>
        <% if owner.hackerspace %>

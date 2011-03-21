@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  status: MyString
+  from_contender: 1
+  to_contender: 1
+  team_id: 1
+
+two:
+  status: MyString
+  from_contender: 1
+  to_contender: 1
+  team_id: 1

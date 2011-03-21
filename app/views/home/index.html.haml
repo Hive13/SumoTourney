@@ -31,6 +31,11 @@
 =link_to "View all matches", matches_path
 %br
 =link_to "View Tournamenets", tournaments_path
+- if current_contender.team
+  - approvals = TeamApproval.find(:all, :conditions => {:team_id => current_contender.team.id, :status => "apply"})
+  - if approvals.size > 0
+    #pending_approvals
+      =link_to "You have #{pluralize(approvals.size, "team request", "team requests")} awaiting approval", team_approvals_path
 - message = Message.find(:last, :conditions => {:msgtype => "admin"})
 - if message
   %br

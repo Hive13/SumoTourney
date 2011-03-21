@@ -1,0 +1,33 @@
+%p#notice= notice
+
+- @applicant = Contender.find(@team_approval.from_contender)
+
+- if @team_approval.from_contender == current_contender.id
+  %p
+    You request is awaiting approval.  Check 'Your Account' Later to see if you
+    have been accepted.
+- elsif @team_approval.status == "apply"
+  %h1="Request to join [#{@team_approval.team.name}]"
+  %p
+    %b Requested at:
+    = @team_approval.created_at
+  %p
+    %b User:
+    = @applicant.username
+  %p
+    %b Org:
+    -if @applicant.hackerspace
+      = @applicant.hackerspace.name
+    -else
+      N/A
+  %p
+    %b Email:
+    = @applicant.email
+  %p
+    %b Additional Notes:
+    = @team_approval.notes
+  %p
+    =link_to "Approve", :action => "approve", :id => @team_approval.id
+    |
+    =link_to "Reject", :action => "reject", :id => @team_approval.id
+= link_to 'Back', teams_path

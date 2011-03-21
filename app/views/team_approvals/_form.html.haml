@@ -1,0 +1,15 @@
+= form_for @team_approval do |f|
+  -if @team_approval.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@team_approval.errors.count, "error")} prohibited this team_approval from being saved:"
+      %ul
+        - @team_approval.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :additional_notes
+    = f.text_field :notes
+  .field
+    = hidden_field_tag(:team_id, @team.id)
+  .actions
+    = f.submit 'Apply'

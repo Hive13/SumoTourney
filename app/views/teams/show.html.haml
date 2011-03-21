@@ -1,0 +1,25 @@
+%p
+  .notice
+  =notice
+
+%p
+  %b Team Name:
+  = @team.name
+
+%p
+  %b Members
+
+%ul
+  - @team.contenders.each do |contender|
+    %li
+      = contender.username
+
+- if not current_contender.team == @team
+  = link_to 'Apply', :controller => :team_approvals, :action => "new", :team_id => @team.id
+  %br
+  %br
+
+- if can? :edit, Team
+  = link_to 'Edit', edit_team_path(@team)
+  |
+= link_to 'Back', teams_path 

@@ -9,14 +9,23 @@ class Ability
     else
 	can :read, :all
 	can :update, Sumobot do |sumobot|
-	  sumobot.contender_id == contender.id
+	  sumobot.contender_id == contender.id or sumobot.contender.team == contender.team
 	end
 	can :update, Hackerspace do |hackerspace|
 	  hackerspace.contender_id == contender.id
         end
-	can :update, Team do |team|
+	can :edit,:destroy, Team do |team|
 	  team.contender_id == contender.id
         end
+        can :show, TeamApproval do |team_approval|
+	  team_approval.from_contender == contender.id or team_approval.team == contender.team
+	end
+	can :approve,:reject, TeamApproval do |team_approval|
+	  team_approval.team == contender.team
+	end
+	can :index, TeamApproval do |team_approval|
+	  contender.team.exists?
+	end
     end
 
     # Define abilities for the passed in user here. For example:

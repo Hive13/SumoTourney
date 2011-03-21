@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110315042329) do
+ActiveRecord::Schema.define(:version => 20110320171148) do
 
   create_table "contenders", :force => true do |t|
     t.string   "email",                                   :default => "", :null => false
@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(:version => 20110315042329) do
 
   create_table "messages", :force => true do |t|
     t.integer  "contender_id"
-    t.string   "type"
+    t.string   "msgtype"
     t.string   "msg"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -97,6 +97,16 @@ ActiveRecord::Schema.define(:version => 20110315042329) do
     t.string   "pic_file_name"
     t.string   "pic_content_type"
     t.integer  "pic_file_size"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "team_approvals", :force => true do |t|
+    t.string   "status"
+    t.integer  "from_contender"
+    t.integer  "to_contender"
+    t.integer  "team_id"
+    t.string   "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -37,6 +37,14 @@
   <%= link_to @contender.hackerspace.name, @contender.hackerspace %>
 <% end %>
 </p>
+<p>
+<% if not @contender.team then %>
+  Member of a Team?  <%= link_to 'Click here to join or start a new team', teams_path %>
+<% else %>
+  <B>Team member of </B>
+  <%= link_to @contender.team.name, @contender.team %>
+<% end %>
+</p>
 
 <h3>Cancel my account</h3>
 

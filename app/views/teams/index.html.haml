@@ -1,0 +1,31 @@
+%h1 Availiable Teams
+
+Note: You can only be a member of one team at a time.
+
+%table
+  %tr
+    %th Teams
+    %th
+    %th
+    %th
+    %th
+
+  - @teams.each do |team|
+    %tr
+      %td= team.name
+      %td= link_to 'Show', team
+      %td
+        - if not current_contender.team_id == team.id
+          = link_to 'Apply', :controller => :team_approvals, :action => "new", :team_id => team.id
+        - else
+          Member
+      %td
+        - if can? :update, Team
+          = link_to 'Edit', edit_team_path(team)
+      %td
+        - if can? :destroy, Team
+          = link_to 'Destroy', team, :confirm => 'Are you sure?', :method => :delete 
+  
+%br
+
+= link_to 'Start a New Team', new_team_path

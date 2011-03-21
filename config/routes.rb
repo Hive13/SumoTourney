@@ -1,6 +1,5 @@
 SumoTourney::Application.routes.draw do
-  get "admin/contenders"
-  post "admin/email_contenders"
+  resources :team_approvals
 
   resources :messages
 
@@ -18,7 +17,12 @@ SumoTourney::Application.routes.draw do
 
   get "home/index"
   get "home/admin"
+  get "admin/contenders"
+  post "admin/email_contenders"
 
+
+  match "/team_approvals/:id/approve" => "team_approvals#approve"
+  match "/team_approvals/:id/reject" => "team_approvals#reject"
   match "/matches/:id/start_round" => "matches#start_round"
   match "/matches/:id/grant_point" => "matches#grant_point"
   match "/hackerspaces/:id/join" => "hackerspaces#join"

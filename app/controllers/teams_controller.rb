@@ -44,9 +44,11 @@ class TeamsController < ApplicationController
   def create
     @team = Team.new(params[:team])
     @team.contender_id = current_contender.id
+    @contender = Contender.find(current_contender.id)
 
     respond_to do |format|
       if @team.save
+	@contender.update_attribute(:team_id, @team.id)
         format.html { redirect_to(@team, :notice => 'Team was successfully created.') }
         format.xml  { render :xml => @team, :status => :created, :location => @team }
       else

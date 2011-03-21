@@ -8,6 +8,11 @@
 - if @sumobot.bot_url.size > 0
   = link_to "Bot Homepage", show_external_link(@sumobot.bot_url)
   %br
+Bot Owner:
+= @sumobot.contender.username
+-if @sumobot.contender.team
+  ="[#{@sumobot.contender.team.name}]"
+
 %table#bot_matches_table
   %tr
     %th#bot_matches_hdr
@@ -29,7 +34,7 @@
       = @sumobot.ties
 
 - if contender_signed_in?
-  - if @sumobot.contender_id == current_contender.id
+  - if can? :update, @sumobot
     = link_to 'Edit Bot Info', edit_sumobot_path(@sumobot) 
     = "|"
 = link_to 'Back', sumobots_path 
