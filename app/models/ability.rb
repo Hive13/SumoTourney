@@ -9,7 +9,7 @@ class Ability
     else
 	can :read, :all
 	can :update, Sumobot do |sumobot|
-	  sumobot.contender_id == contender.id or sumobot.contender.team == contender.team
+	  sumobot.contender_id == contender.id or (sumobot.contender.team == contender.team and sumobot.contender.team)
 	end
 	can :update, Hackerspace do |hackerspace|
 	  hackerspace.contender_id == contender.id
@@ -18,7 +18,7 @@ class Ability
 	  team.contender_id == contender.id
         end
         can :show, TeamApproval do |team_approval|
-	  team_approval.from_contender == contender.id or team_approval.team == contender.team
+	  team_approval.from_contender == contender.id or (team_approval.team == contender.team and team_approval.team)
 	end
 	can :approve,:reject, TeamApproval do |team_approval|
 	  team_approval.team == contender.team
