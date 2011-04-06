@@ -15,9 +15,9 @@
 
 
 - if @match.tournament_id then
-%b
-  = link_to "Tournament Match", tournament_path(@match.tournament_id)
-  %br
+  %b
+    = link_to "Tournament Match", tournament_path(@match.tournament_id)
+    %br
 
 - if @match.winning_bot then
   %b
