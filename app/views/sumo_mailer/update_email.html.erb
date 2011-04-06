@@ -8,9 +8,7 @@
     <p>
       Hello  <%= @contender.username %>.
     </p>
-    <p>
-      <%= @msg %>
-    </p>
+    <%= @msg.html_safe %>
     <p>This message was sent from the Admin team at <%= @url %></p>
   </body>
 </html>
