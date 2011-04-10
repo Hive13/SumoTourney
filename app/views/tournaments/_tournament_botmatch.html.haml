@@ -4,7 +4,10 @@
       = link_to bot.botname, match_path(match)
   - else
     %del
-      = link_to bot.botname, match_path(match)
+      - if bot.is_a? Sumobot
+        = link_to bot.botname, match_path(match)
+      - else
+        = bot
 - else
   - if bot.is_a? Sumobot then
     = link_to bot.botname, match_path(match)

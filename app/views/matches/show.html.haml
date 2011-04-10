@@ -7,11 +7,14 @@
       = Sumobot.find(@match.first_bot_id).botname
     - else
       = "TBD"
-    Versus
-    - if @match.second_bot_id
-      = Sumobot.find(@match.second_bot_id).botname
+    - if @match.second_bot_from_match == -1
+      Bye Round
     - else
-      = "TBD"
+      Versus
+      - if @match.second_bot_id
+        = Sumobot.find(@match.second_bot_id).botname
+      - else
+        = "TBD"
 
 
 - if @match.tournament_id then
@@ -19,11 +22,17 @@
     = link_to "Tournament Match", tournament_path(@match.tournament_id)
     %br
 
+- if @match.second_bot_from_match == -1
+  %p
+    This is a bye match and is just a place holder
+  %p
+    =link_to "Process Bye", :action => "process_bye"
+
 - if @match.winning_bot then
   %b
     = Sumobot.find(@match.winning_bot).botname
     Wins!!
-- else
+- elsif not @match.second_bot_from_match == -1
   %table
     %tr
       %td

@@ -25,6 +25,7 @@ SumoTourney::Application.routes.draw do
   match "/team_approvals/:id/reject" => "team_approvals#reject"
   match "/matches/:id/start_round" => "matches#start_round"
   match "/matches/:id/grant_point" => "matches#grant_point"
+  match "/matches/:id/process_bye" => "matches#process_bye"
   match "/hackerspaces/:id/join" => "hackerspaces#join"
 
   # The priority is based upon order of creation:

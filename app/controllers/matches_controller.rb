@@ -176,6 +176,29 @@ class MatchesController < ApplicationController
         format.html { redirect_to(@match) }
         format.xml { head :ok }
     end
+  end
 
+  def process_bye
+    @match = Match.find(params[:id])
+    if @match
+      if @match.second_bot_from_match == -1 then
+	@match.update_attributes(:winning_bot => @match.first_bot_id)
+	nextmatch = Match.find(:first, :conditions => {:first_bot_from_match => @match.id})
+	if nextmatch then
+		nextmatch.update_attributes(:first_bot_id => @match.first_bot_id)
+	else
+	   	nextmatch = Match.find(:first, :conditions => {:second_bot_from_match => @match.id})
+		if nextmatch then
+			nextmatch.update_attributes(:second_bot_id => @match.first_bot_id)
+		else
+			puts "TODO: Game done, assign winnners"
+		end
+	end
+      end
+    end
+    respond_to do |format|
+        format.html { redirect_to(@match) }
+        format.xml { head :ok }
+    end
   end
 end
