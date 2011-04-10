@@ -4,22 +4,19 @@
 
 %h1 Tournament Bracket
 
-- (1..@tournament.max_rounds).each do |round|
-  %b="Round #{round}"
-  %br
-  - matches = Match.find(:all, :conditions => {:tournament_id => @tournament.id, :tournament_round => round})
-  - if matches.size > 0
-    - matches.each do |match|
-      = "(#{match.id}) 1st = #{match.first_bot_from_match}"
-      - if match.first_bot_id
-        = " // #{match.first_bot_id}"
-      %br
-      = "(#{match.id}) 2nd = #{match.second_bot_from_match}"
-      - if match.second_bot_id
-        = " // #{match.second_bot_id}"
-      %br
-  - else
-    Winner
+%table
+  - (1..@tournament.max_rounds).each do |round|
+    %th="Round #{round}"
+
+  %tr
+  - (1..@tournament.max_rounds).each do |round|
+    %td
+      - matches = Match.find(:all, :conditions => {:tournament_id => @tournament.id, :tournament_round => round})
+      - if matches.size > 0
+        - matches.each do |match|
+          = render :partial => 'tournament_match_bracket', :locals => {:match => match}
+      - else
+        Winner
      
 %br
 

@@ -1,16 +1,13 @@
 - if match.winning_bot then
   - if match.winning_bot == bot.id then
-    .bracket
-      %b
-        = link_to bot.botname, match_path(match)
-  - else
-    .bracket
-      %del
-        = link_to bot.botname, match_path(match)
-- else
-  .bracket
-    - if bot.is_a? Sumobot then
+    %b
       = link_to bot.botname, match_path(match)
-    - else
-      = link_to "TBD", match_path(match)
+  - else
+    %del
+      = link_to bot.botname, match_path(match)
+- else
+  - if bot.is_a? Sumobot then
+    = link_to bot.botname, match_path(match)
+  - else
+    = link_to bot, match_path(match)
 

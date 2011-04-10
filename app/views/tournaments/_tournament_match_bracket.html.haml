@@ -1,26 +1,29 @@
-%td{:colspan => round}
-  - if match
-    -if match.first_bot_id then
-      - bot1 = Sumobot.find(match.first_bot_id)
-    -else
-      - prev_match = Match.find(match.first_bot_from_match)
-      - if prev_match.winning_bot then
-        - bot1 = Sumobot.find(prev_match.winning_bot)
-      - else
-        - bot1 = "TBD"
-    -if match.second_bot_id then
-      - bot2 = Sumobot.find(match.second_bot_id)
-    -else
-      - prev_match = Match.find(match.second_bot_from_match)
-      - if prev_match.winning_bot then
-        - bot2 = Sumobot.find(prev_match.winning_bot)
-      - else
-        - bot1 = "TBD"
+- if match
+  -if match.first_bot_id then
+    - bot1 = Sumobot.find(match.first_bot_id)
+  -elsif match.first_bot_from_match == -1
+    - bot1 = "___BYE____"
+  -else
+    - prev_match = Match.find(match.first_bot_from_match)
+    - if prev_match.winning_bot then
+      - bot1 = Sumobot.find(prev_match.winning_bot)
+    - else
+      - bot1 = "__________"
+  -if match.second_bot_id then
+    - bot2 = Sumobot.find(match.second_bot_id)
+  -elsif match.second_bot_from_match == -1
+    - bot2 = "___BYE____"
+  -else
+    - prev_match = Match.find(match.second_bot_from_match)
+    - if prev_match.winning_bot then
+      - bot2 = Sumobot.find(prev_match.winning_bot)
+    - else
+      - bot2 = "__________"
 
-    = render :partial => "tournament_botmatch", :locals => {:match => match, :bot => bot1}
-    .bracket_bottom
-      = render :partial => "tournament_botmatch", :locals => {:match => match, :bot => bot2}
-  - else
-    .bracket
-    .bracket_bottom
-      .bracket
+  = render :partial => "tournament_botmatch", :locals => {:match => match, :bot => bot1}
+  %br
+  = render :partial => "tournament_botmatch", :locals => {:match => match, :bot => bot2}
+  %br
+- else
+  Error No Match
+%br
