@@ -4,38 +4,23 @@
 
 %h1 Tournament Bracket
 
-- @last_match = Array.new
-- col = Array.new
-%table{:border => "1"}
-  %tr
-    - (1..@tournament.max_rounds).each do |round|
-      - col[round] = @tournament.matches.find(:all, :conditions => {:tournament_round => round})
-      - @last_match[round] = 0
-      %th
-        - if round == @tournament.max_rounds then
-          = "Final Round"
-        - else
-          = "Round #{round}"
-      %th
-
-  - top = true
-  - skip = 1
-  - (1..@tournament.matches.size + @tournament.matches.size - 1).each do |row|
-    %tr
-      - (1..@tournament.max_rounds).each do |round|
-        - if row <= col[round].size then
-          - row_match = col[round]
-          - match = row_match[@last_match[round]]
-          = render :partial => "tournament_match_bracket", :locals => {:match => match, :round => round}
-          - @last_match[round] += 1
-          %td{:colspan => round}
-            - if top
-              .bracket_join_top
-              - top = false
-            - else
-              .bracket_join_bottom
-              - top = true
-      
+- (1..@tournament.max_rounds).each do |round|
+  %b="Round #{round}"
+  %br
+  - matches = Match.find(:all, :conditions => {:tournament_id => @tournament.id, :tournament_round => round})
+  - if matches.size > 0
+    - matches.each do |match|
+      = "(#{match.id}) 1st = #{match.first_bot_from_match}"
+      - if match.first_bot_id
+        = " // #{match.first_bot_id}"
+      %br
+      = "(#{match.id}) 2nd = #{match.second_bot_from_match}"
+      - if match.second_bot_id
+        = " // #{match.second_bot_id}"
+      %br
+  - else
+    Winner
+     
 %br
 
 = link_to 'Edit', edit_tournament_path(@tournament) 
