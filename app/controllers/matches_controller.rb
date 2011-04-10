@@ -118,6 +118,7 @@ class MatchesController < ApplicationController
   def grant_point
     @bot = Sumobot.find(params[:bot_id])
     @match = Match.find(params[:id])
+    @other_bot_id
     
     if cannot? :manage, @match then
 	redirect_to "/hax.html"
@@ -141,6 +142,7 @@ class MatchesController < ApplicationController
 	when 3 then
 		@match.update_attributes(:first_bot_round3_score => 1)
 	end
+	@other_bot_id = @match.second_bot_id
     elsif @match.second_bot_id == @bot.id then
 	case round
 	when 1 then
@@ -150,6 +152,7 @@ class MatchesController < ApplicationController
 	when 3 then
 		@match.update_attributes(:second_bot_round3_score => 1)
 	end
+	@other_bot_id = @match.first_bot_id
     end
 
     if @match.bot1_final_score == 2 or
@@ -164,7 +167,7 @@ class MatchesController < ApplicationController
 		if nextmatch then
 			nextmatch.update_attributes(:second_bot_id => @bot.id)
 		else
-			puts "TODO: Game done, assign winnners"
+			set_tournament_winner(@match, @bot.id, @other_bot_id)
 		end
 	   end
 	 end	
@@ -191,7 +194,7 @@ class MatchesController < ApplicationController
 		if nextmatch then
 			nextmatch.update_attributes(:second_bot_id => @match.first_bot_id)
 		else
-			puts "TODO: Game done, assign winnners"
+			set_tournament_winner(@match, @match.first_bot_id, -1)
 		end
 	end
       end
@@ -200,5 +203,10 @@ class MatchesController < ApplicationController
         format.html { redirect_to(@match) }
         format.xml { head :ok }
     end
+  end
+
+  def set_tournament_winner(match, first, second)
+    @tournament = Tournament.find(match.tournament_id)
+    @tournament.update_attributes(:first_place => first, :second_place => second)
   end
 end

@@ -21,7 +21,12 @@
       %tr
         %td= tournament.current_round
         %td= tournament.max_rounds
-        %td= "TODO"
+        %td
+          - if tournament.first_place
+            - bot = Sumobot.find(tournament.first_place)
+            = "Winner: #{bot.botname}"
+          - else
+            = "In Progess"
         %td= link_to 'Show', tournament
         - if can? :manage, tournament then
           %td= link_to 'Edit', edit_tournament_path(tournament)

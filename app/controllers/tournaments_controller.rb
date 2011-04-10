@@ -49,7 +49,7 @@ class TournamentsController < ApplicationController
     end
 
     @bot_ids = Array.new
-    @competing.each_key {|bot_id| @bot_ids << bot_id }
+    @competing.each_key {|bot_id| @bot_ids << bot_id if @competing[bot_id] == "1"}
 
     @bot_ids.shuffle!
 
@@ -134,17 +134,14 @@ class TournamentsController < ApplicationController
 
   # Assigns bots to first round
   def assign_round1(t_id, bots)
-puts "DEBUG: assign_round(#{t_id}, #{bots.inspect})"
     matches = Match.find(:all, :conditions => {:tournament_id => t_id, :tournament_round => 1})
     matches.each do |match|
 	if match.first_bot_from_match == 0 then
 	  bot_id = bots.pop
-puts "DEBUG: first_bot_id = #{bot_id}"
 	  match.update_attributes(:first_bot_id => bot_id)
 	end
 	if match.second_bot_from_match == 0 then
 	  bot_id = bots.pop
-puts "DEBUG: second_bot_id = #{bot_id}"
 	  match.update_attributes(:second_bot_id => bot_id)
 	end
     end

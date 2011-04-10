@@ -17,6 +17,11 @@
           = render :partial => 'tournament_match_bracket', :locals => {:match => match}
       - else
         Winner
+        - if @tournament.first_place
+          %br
+          %b
+            - bot = Sumobot.find(@tournament.first_place)
+            = bot.botname 
      
 %br
 
